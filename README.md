@@ -1,1 +1,1 @@
-<h1 style="color:blue;"><b>StackdProgress</b></html>
+<h1><b>StackdProgress</b></html>
