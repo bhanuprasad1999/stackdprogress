@@ -31,15 +31,14 @@
         <div class="fieldtexture">
             <label for="password">Password</label>
             {{ forms.password }}
-            {% if forms.password != None %} 
             {{ forms.errors.password }}
-            {% endif%}
         </div>
         <div class="fieldtexture">
             <label for="repassword">Confirm Password</label>
             {{ forms.repassword }}
         </div>
-        <input type="submit" value="save">
+        {{ forms.errors.repassword }}
+        <input type="submit" value="Submit">
     </form>
 </div>
 {% endblock %}

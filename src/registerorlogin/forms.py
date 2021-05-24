@@ -9,14 +9,24 @@ class UserForm(forms.Form):
     password = forms.CharField(min_length=8,max_length=10,widget=forms.PasswordInput())
     repassword = forms.CharField(min_length=8,max_length=10,widget=forms.PasswordInput())
 
+    #UserId validation
     def clean_userid(self):
         userid = self.cleaned_data.get('userid')
 
-        if userid == 'hello':
-            raise forms.ValidationError('we have done two validation calls')
+        if re.match('[a-zA-Z0-9_]\w*@\w+[0-9]\w*',userid) == None:
+            raise forms.ValidationError('The userid must be in format of alphabet and number@number only')
+        return userid
 
+    # Password Validation
     def clean_password(self):
         password = self.cleaned_data.get('password')
+        
+        if re.match('[a-zA-Z0-9]\w*[@_!$?#]w*[a-zA-Z0-9]\w*',password) == None: 
+            raise forms.ValidationError('The password must contain numbers and alphabets and some characters (@ _ ! ? $ #)')
+        return password
 
-        if re.match('[a-zA-Z0-9]\w*@_\w+[a-zA-Z0-9]\w*',password) == None:                      #password verify example 
-            raise forms.ValidationError('password consists of above symbols')
+    def clean_repassword(self):
+        password = self.cleaned_data.get('password')
+        repassword = self.cleaned_data.get('repassword')
+        if password != repassword:
+            raise forms.ValidationError('The password is not matched !')
