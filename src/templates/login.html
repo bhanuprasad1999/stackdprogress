@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block style %}
+<style>
+    .errorlist{
+        color:red;
+        list-style-type: none;
+    }
+    .fieldtexture{ 
+        padding: 10px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {{ forms }}
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}

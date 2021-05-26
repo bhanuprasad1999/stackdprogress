@@ -7,6 +7,9 @@
 <body>
     {% block header %}
     {% include "nav-bar.html" %}
+    {{ message }}
+    {% endblock %}
+    {% block error %}
     {% endblock %}
     {% block content %}{% endblock %}
     {% block footer %}{% endblock %}

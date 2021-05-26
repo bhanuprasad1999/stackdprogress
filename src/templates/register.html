@@ -11,10 +11,15 @@
     }
 </style>
 {% endblock %}
+{% block header %}
+<h1>Register</h1>
+{% endblock %}
+<p class="errorlist">{{ messages.account }}</p>
 {% block content %}
 <div>
     <form method="post" autocomplete="off">
         {% csrf_token %}
+        {{ messages.account }}
         <div class="fieldtexture">
             <label for="userid">User ID</label>
             {{ forms.userid }}
@@ -40,5 +45,6 @@
         {{ forms.errors.repassword }}
         <input type="submit" value="Submit">
     </form>
+    <p>If you have an account,Login from <a href="{% url 'login' %}">here</a>.</p>
 </div>
 {% endblock %}

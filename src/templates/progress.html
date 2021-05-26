@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block title %}Progress{% endblock %}
+{% block style %}
+<style>
+    ul.breadcrumb {
+      margin-top: 0;
+      text-align:center;
+      padding: 10px 16px;
+      list-style: none;
+      background-color: #eee;
+      scroll-behavior: smooth;
+    }
+    ul.breadcrumb li {
+      display: inline;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    ul.breadcrumb li+li:before {
+      padding:6.8px;
+      color: black;
+      content: "/\00a0";
+    }
+    li a {
+      color: #0275d8;
+      text-decoration: none;
+    }
+    li a:hover {
+      color: #01447e;
+      text-decoration: underline;
+    }
+    li a:active{
+        color:green;
+    }
+    li a.next{
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    li a span.next:hover:nth-child(odd){
+        color: #0275d8;
+        font-size: 16px;
+    }
+    li a span.next:hover:nth-child(even){
+        color:#01447e;
+        font-size: 16px;
+    }
+    </style>
+{% endblock %}
+</head>
+<body>
+    {% block header %}
+    {% include "nav-bar.html" %}
+    {% endblock %}
+    {% block content %}
+    <div>
+        <div><input type="number" name="year" id="year" min="2000" max="3000"></div>
+        <div>
+            <ul class="breadcrumb">
+                <li><a class='next' href=""><span><</span><span><</span></a></li>
+                {% for date in context %}
+                    <li><a href="">{{ date }}</a></li>
+                {% endfor %}
+                <li><a class='next' href=""><span>></span><span>></span></a></li>
+            </ul>
+        </div>
+        <div>
+            {% include "daysheet.html" %}
+        </div>
+    </div>
+    {% endblock %}
+    {% block footer %}{% endblock %}
+</body>
+</html>
