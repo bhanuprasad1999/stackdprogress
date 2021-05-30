@@ -5,7 +5,7 @@ import re
 
 # Register the user if doesnot exists in Database.
 class UserForm(forms.Form):
-    userid = forms.CharField(max_length=10)
+    userid = forms.CharField(max_length=10,widget=forms.TextInput(attrs={'title':'User Id'}))
     firstname = forms.CharField(max_length=100)
     lastname = forms.CharField(max_length=100)
     password = forms.CharField(min_length=8,max_length=10,widget=forms.PasswordInput())

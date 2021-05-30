@@ -53,18 +53,22 @@
     {% endblock %}
     {% block content %}
     <div>
-        <div><input type="number" name="year" id="year" min="2000" max="3000"></div>
+      <div>
+        <form autocomplete="off" method="post">
+          {% csrf_token %}
+          {{ forms.year }}&nbsp;&nbsp;{{ forms.month }}        
+        </form>
+      </div>
         <div>
             <ul class="breadcrumb">
                 <li><a class='next' href=""><span><</span><span><</span></a></li>
-                {% for date in context %}
-                    <li><a href="">{{ date }}</a></li>
+                {% for day in days %}
+                    <li><a href="">{{ day }}</a></li>
                 {% endfor %}
                 <li><a class='next' href=""><span>></span><span>></span></a></li>
             </ul>
         </div>
         <div>
-            {% include "daysheet.html" %}
         </div>
     </div>
     {% endblock %}

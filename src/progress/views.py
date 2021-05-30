@@ -1,15 +1,25 @@
-from django.shortcuts import render,HttpResponseRedirect
-from datetime import datetime
+from django.shortcuts import render
+from datetime import datetime as dt
+from .forms import DateForm
+from calendar import monthrange
 
 # Create your views here.
 def progress(request,userid):
-    context = []
-    for i in range(1,32):
-        context.append(i)
-    return render(request,'progress.html',{'context':context,'userid':userid})
+    if request.method == 'POST':
+        forms = DateForm(request.POST)
 
-def daysheet(request):
-    return render(request,'daysheet.html')
+        if forms.is_valid():
 
-def pagenotfound(request):
-    return render(request,'pagenotfound.html')
+            year = forms.cleaned_data['year']
+            month = forms.cleaned_data['month']
+            daydate = list(monthrange(year, int(month)))           # Since monthrange() is returning the tuple of (day,no.of days)
+            days = range(1,daydate[1]+1)
+
+
+    else:
+        year = dt.now().year
+        month = dt.now().month
+        forms = DateForm()
+
+    return render(request,'progress.html',{'forms':forms,'year':year,'month':month,'days':days})
+
