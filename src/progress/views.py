@@ -3,7 +3,6 @@ from datetime import datetime as dt
 from .forms import DateForm
 from calendar import monthrange
 
-# Create your views here.
 def progress(request,userid):
     if request.method == 'POST':
         forms = DateForm(request.POST)
