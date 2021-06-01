@@ -14,7 +14,7 @@ choices = [('1','January'), ('2','February'), ('3','March'), ('4','April'), ('5'
 
 class DateForm(forms.Form):
 
-    year = forms.IntegerField(max_value=3000,widget=forms.NumberInput(attrs={'onchange':'submit();'}),required=True)
+    year = forms.IntegerField(max_value=3000,initial=dt.now().year, widget=forms.NumberInput(attrs={'onchange':'submit();'}),required=True)
 
     month = forms.ChoiceField(choices=choices,initial=dt.now().month, widget=forms.Select(attrs={'onchange':'submit();'}))
     
