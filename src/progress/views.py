@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
+from django.urls import reverse
 from datetime import datetime as dt
 from .forms import DateForm
 from calendar import monthrange
 
-def progress(request,userid):
+def progress(request,userid,day):
     if request.method == 'POST':
         forms = DateForm(request.POST)
 
@@ -11,9 +12,9 @@ def progress(request,userid):
 
             year = forms.cleaned_data['year']
             month = forms.cleaned_data['month']
-            daydate = list(monthrange(year, int(month)))           # Since monthrange() is returning the tuple of (day,no.of days)
-            days = range(1,daydate[1]+1)
-
+            # Since monthrange() is returning the tuple of (day,no.of days)
+            daydate = list(monthrange(year, int(month)))
+            days = range(1, daydate[1]+1)
 
     else:
         year = dt.now().year
@@ -22,6 +23,5 @@ def progress(request,userid):
         daydate = list(monthrange(year, int(month)))
         days = range(1, daydate[1]+1)
         forms = DateForm()
-
-    return render(request,'progress.html',{'forms':forms,'year':year,'month':month,'days':days})
+    return render(request,'progress.html',{'forms':forms,'year':year,'month':month,'days':days,'userid':userid})
 

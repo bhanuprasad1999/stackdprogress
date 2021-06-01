@@ -1,13 +1,41 @@
-<div>
-    <nav>
+<html>
+    <head>
+        <style>
+            ul{
+                display:inline-flexbox;
+                padding:5px;
+                margin:5px 10px;
+                background-color: black;
+            }
+
+            li{
+                display:inline-block;
+                padding:5px;
+            }
+
+            li>a{
+                text-decoration:none;
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                font-size: 14px;
+                color:white;
+            }
+
+            li>a:hover{
+                font-weight:bold;
+            }
+
+            li.right{
+                float:right;
+                color:white;
+            }
+        </style>
+    </head>
+    <body>
         <ul>
-            <li>Home</li>
-            <li>Task</li>
-            <li>Register</li>
-            <li>Login</li>
-            {% if userid != None %}
-            <li>Logout</li>
-            {% endif %}
+            <li><a href="">Home</a></li>
+            <li><a href="">Edit</a></li>
+            <li class="right">{{ userid }}</li>
+            <li class="right"><a href="">Logout</a></li>
         </ul>
-    </nav>
-</div>
+    </body>
+</html>

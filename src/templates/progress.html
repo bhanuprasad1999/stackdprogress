@@ -1,77 +1,73 @@
-{% extends 'base.html'%}
-{% block title %}Progress{% endblock %}
-{% block style %}
+{% extends 'base.html' %}
+{% block title %}Task{% endblock %}
+{% block link %}
 <style>
-    ul.breadcrumb {
-      margin-top: 0;
-      text-align:center;
-      padding: 10px 16px;
-      list-style: none;
-      background-color: #eee;
-      scroll-behavior: smooth;
-    }
-    ul.breadcrumb li {
-      display: inline;
-      font-size: 15px;
-      font-weight: bold;
-    }
-    ul.breadcrumb li+li:before {
-      padding:6.8px;
-      color: black;
-      content: "/\00a0";
-    }
-    li a {
-      color: #0275d8;
-      text-decoration: none;
-    }
-    li a:hover {
-      color: #01447e;
-      text-decoration: underline;
-    }
-    li a:active{
-        color:green;
-    }
-    li a.next{
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 15px;
-    }
-    li a span.next:hover:nth-child(odd){
-        color: #0275d8;
-        font-size: 16px;
-    }
-    li a span.next:hover:nth-child(even){
-        color:#01447e;
-        font-size: 16px;
-    }
-    </style>
+  h1{ 
+    color:#DEF2F1;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding :5px 20px;
+    margin:2px 20px;
+    text-align:center;
+  }
+
+  p.b{
+    visibility: hidden;
+  }
+
+  .year{
+    width:70px;
+    height:20px;
+    margin:15px 5px 0px 10px;
+    border:2px solid #2B7A7B;
+    border-radius:5px;
+  }
+
+  .month{
+    width:100px;
+    height:20px;
+    border:2px solid #2B7A7B;
+    border-radius:5px;
+  }
+
+  ul.date-list{
+    background-color: #3AAFA9;
+    text-align: center;
+    padding:2px 5px;
+  }
+
+  li.date-items{
+    font-size: 14px;
+    padding:8px;
+  }
+
+  li.date-items:hover{
+    color:#2B7A7B;
+    font-weight:bolder;
+    font-size: 18px;
+  }
+  
+  p.contact{
+    text-align: center;
+  }
+</style>
 {% endblock %}
-</head>
-<body>
-    {% block header %}
-    {% include "nav-bar.html" %}
-    {% endblock %}
-    {% block content %}
-    <div>
-      <div>
-        <form autocomplete="off" method="post">
-          {% csrf_token %}
-          {{ forms.year }}&nbsp;&nbsp;{{ forms.month }}        
-        </form>
-      </div>
-        <div>
-            <ul class="breadcrumb">
-                <li><a class='next' href=""><span><</span><span><</span></a></li>
-                {% for day in days %}
-                    <li><a href="">{{ day }}</a></li>
-                {% endfor %}
-                <li><a class='next' href=""><span>></span><span>></span></a></li>
-            </ul>
-        </div>
-        <div>
-        </div>
-    </div>
-    {% endblock %}
-    {% block footer %}{% endblock %}
-</body>
-</html>
+{% block header %}
+  <h1>StackdProgress</h1>
+  {% include 'nav-bar.html' %}
+{% endblock %}
+{% block main %}
+<form method="POST" autocomplete="off">
+  {% csrf_token %}
+  {{ forms.year }}{{ forms.month }}
+  <ul class="date-list">
+    {% for day in days %}
+    <li class="date-items"><a href="{{ day }}" id="{{ day }}">{{ day }}</a></li>
+    {% endfor %}
+  </ul>
+</form>
+<section>
+</section>
+{% endblock %}
+{% block footer %}
+<p class="contact">This Project is developed and controlled by Cosquntime Group of Company</p>
+{% endblock %}

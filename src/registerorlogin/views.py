@@ -3,6 +3,7 @@ from django.urls import reverse
 from registerorlogin.forms import UserForm, LoginForm
 from registerorlogin.models import UserModel
 from django.contrib.auth.hashers import make_password
+from datetime import datetime as dt
 
 messages = {}
 # Create your views here.
@@ -27,11 +28,12 @@ def register(request):
 
 
 def login(request):
+    day = dt.now().day
     if request.method == 'POST':
         forms = LoginForm(request.POST)
         if forms.is_valid():
             userid = forms.cleaned_data['userid']
-            return HttpResponseRedirect(reverse('progress',args=(userid,)))
+            return HttpResponseRedirect(reverse('progress',args=(userid,day)))
     else:
         forms = LoginForm()
     return render(request,'login.html',{'forms':forms})

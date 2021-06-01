@@ -13,8 +13,7 @@ class ContentForm(forms.Form):
 choices = [('1','January'), ('2','February'), ('3','March'), ('4','April'), ('5','May'), ('6','June'), ('7','July'), ('8','August'), ('9','September'),('10','October'),('11','November'),('12','December')]
 
 class DateForm(forms.Form):
+    year = forms.IntegerField(max_value=3000,initial=dt.now().year, widget=forms.NumberInput(attrs={'onchange':'submit();','class':'year'}),required=True)
 
-    year = forms.IntegerField(max_value=3000,initial=dt.now().year, widget=forms.NumberInput(attrs={'onchange':'submit();'}),required=True)
-
-    month = forms.ChoiceField(choices=choices,initial=dt.now().month, widget=forms.Select(attrs={'onchange':'submit();'}))
+    month = forms.ChoiceField(choices=choices,initial=dt.now().month, widget=forms.Select(attrs={'onchange':'submit();','class':'month'}))
     
